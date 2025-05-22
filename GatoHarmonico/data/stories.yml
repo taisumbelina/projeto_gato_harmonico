@@ -1,0 +1,97 @@
+version: "3.1"
+
+stories:
+
+- story: Agendar aula completa (online) com lembretes
+  steps:
+  - intent: saudacao
+  - action: utter_saudacao
+  - action: action_schedule_inactivity_reminder
+  - intent: agendamento_aula
+    entities:
+    - instrumentos: "violão"
+  - action: utter_ask_modo_agendamento
+  - action: action_schedule_inactivity_reminder
+  - intent: agendamento_modo
+    entities:
+    - modo_agendamento: "online"
+  - action: utter_ask_dados_pessoais
+  - action: action_schedule_inactivity_reminder
+  - intent: fornecer_dados_pessoais
+  - action: utter_ask_data_hora
+  - action: action_schedule_inactivity_reminder
+  - intent: agendamento_hora
+  - action: utter_confirma_agendamento_final
+  - action: action_schedule_inactivity_reminder
+  - intent: pagamento
+  - action: utter_pagamento
+
+- story: Agendar aula completa (presencial)
+  steps:
+  - intent: saudacao
+  - action: utter_saudacao
+  - intent: agendamento_aula
+  - action: utter_ask_instrumento_aula
+  - intent: agendamento_aula
+    entities:
+    - instrumentos: "bateria"
+  - action: utter_ask_modo_agendamento
+  - intent: agendamento_modo
+    entities:
+    - modo_agendamento: "presencial"
+  - action: utter_ask_dados_pessoais
+  - intent: fornecer_dados_pessoais
+    entities:
+    - nome: "Gato Félix"
+    - cpf: "555.666.777-88"
+    - rg: "11.222.333-4"
+    - date: "10/11/1919"
+  - action: utter_ask_data_hora
+  - intent: agendamento_hora
+    entities:
+    - date: "próxima terça"
+    - time: "10:30"
+  - action: utter_confirma_agendamento_final
+  - intent: pagamento
+  - action: utter_pagamento
+  - intent: despedida
+  - action: utter_despedida
+
+- story: Agendamento consultoria (online)
+  steps:
+  - intent: saudacao
+  - action: utter_saudacao
+  - intent: agendamento_consultoria
+  - action: utter_ask_instrumento_consultoria
+  - intent: agendamento_modo
+    entities:
+    - modo_agendamento: "online"
+  - action: utter_ask_dados_pessoais
+  - intent: fornecer_dados_pessoais
+  - action: utter_ask_data_hora
+  - intent: agendamento_hora
+  - action: utter_confirma_agendamento_final
+  - intent: pagamento
+  - action: utter_pagamento
+  - intent: despedida
+  - action: utter_despedida
+
+- story: Comprar instrumento
+  steps:
+  - intent: saudacao
+  - action: utter_saudacao
+  - intent: compra_instrumento
+  - action: utter_compra_instrumento
+  - intent: listagem_instrumentos
+  - action: utter_listagem_instrumentos
+  - intent: despedida
+  - action: utter_despedida
+
+- story: Saber Materiais
+  steps:
+  - intent: saudacao
+  - action: utter_saudacao
+  - intent: materiais
+  - action: utter_materiais
+  - intent: despedida
+  - action: utter_despedida

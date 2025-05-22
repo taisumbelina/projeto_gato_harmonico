@@ -1,0 +1,153 @@
+version: "3.1"
+
+intents:
+  - saudacao
+  - agendamento_aula
+  - agendamento_consultoria
+  - compra_instrumento
+  - listagem_instrumentos
+  - materiais
+  - despedida
+  - pagamento
+  - fornecer_dados_pessoais
+  - agendamento_hora
+  - agendamento_modo
+  - EXTERNAL_inactivity_reminder
+
+entities:
+  - instrumentos
+  - periodo
+  - dia_semana
+  - forma_pagamento
+  - cpf  # Usará RegexEntityExtractor
+  - rg   # Usará RegexEntityExtractor
+  - nome # Usará DIETClassifier
+  - date # Usará Duckling
+  - time # Usará Duckling
+  - modo_agendamento
+
+slots:
+  instrumentos:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: instrumentos
+  modo_agendamento:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: modo_agendamento
+  nome:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: nome
+  cpf:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: cpf
+  rg:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: rg
+  data_nascimento:
+    type: text # Duckling extrai como 'time', mas guardamos como texto para evitar confusão com 'date' do agendamento
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: date # Assumindo que Duckling pegará isso como 'date'
+  data_agendamento:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: date
+  hora_agendamento:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: time
+  forma_pagamento:
+    type: text
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: forma_pagamento
+
+responses:
+  utter_saudacao:
+  - text: "Miau! 😺 Tudo certo por aqui! Eu sou o Freddie Meowcury, seu atendente felino da Gato Harmônico🎶✨ Na nossa toca vendemos instrumentos, fornecemos aulas e consultorias, e temos materiais incríveis.\n\nQual serviço o trouxe até nossa toca? 🎶"
+  utter_agendamento_aula:
+  - text: "Miauravilhaaa! 🎸✨ Na Gato Harmônico, oferecemos aulas para uma miadeira de instrumentos! Temos opções em:\n\nInstrumentos de Corda: Guitarras, Violões, Contrabaixos, Ukuleles, Cavaquinhos, Violinos, Violas e Violoncelos.\nInstrumentos de Sopro: Flautas, Clarinetes, Saxofones, Trompetes, Trombones, Tubas e Gaitas de boca.\nInstrumentos de Teclas: Teclados, Sintetizadores, Pianos, Órgãos e Escaletas.\nInstrumentos de Percussão: Baterias, Pandeiros, Tamborins, Surdos, Timbas, Triângulos, Kalimbas e Boomwhackers.\n\nVocê pode levar seu instrumento ou usar um dos nossos aqui na escola.\n🎹 O valor é de R$ 90,00 por aula, com duração de aproximadamente 1h, ou você pode fazer o pacote mensal com 4 aulas por R$ 320,00 — e ainda recebe um mimo musical surpresa no primeiro mês! 🎁✨\n\nQual [instrumento](instrumentos) você gostaria de aprender?"
+  utter_ask_instrumento_aula:
+  - text: "Qual [instrumento](instrumentos) você gostaria de aprender?"
+  utter_agendamento_consultoria:
+  - text: "🎶\nA consultoria musical é tipo um bate-papo cheio de harmonia, onde a gente entende seus objetivos, seu nível atual e traça um caminho musical que seja a sua cara! 🐾✨\n🎯 O investimento é de R$ 120,00 por sessão, com duração de aproximadamente 1h.\n\nVamos agendar? Você prefere que a consultoria seja [online](modo_agendamento:online) ou [presencial](modo_agendamento:presencial)?"
+  utter_compra_instrumento:
+  - text: "🎶 Aqui na GatoHarmônico temos uma seleção de instrumentos que fazem qualquer coração ronronar de emoção!\nViolões, ukuleles, teclados, percussões… tudo afinadinho, prontinho pra você tocar suas emoções 💛\nVocê já tem um [instrumento](instrumentos) em mente ou quer minha ajudinha felina para informar todos disponiveis?"
+  utter_materiais:
+  - text: "Miiiiaaaau temos sim! E tem conteúdo tão bom que até os gatos do bairro andam cantando afinadinho! 🎤🐱✨\n Na Gato Harmônico, você pode acessar nossos vídeos, e-books, tutoriais e exercícios musicais através de dois planos:\n\n🎧 Plano Gratuito\n Acesso a uma seleção de conteúdos educativos\n Com anúncios entre as aulas\n Ideal pra quem tá começando ou quer experimentar sem compromisso\n 💰 R$ 0,00(gratuito mesmo!)\n\n🎵 Plano Premium\n Acesso completo a todos os conteúdos (inclusive os exclusivos!\n Zero anúncios! Só música e aprendizado 🎶\n Materiais bônus todo mês (tipo playbacks, partituras, desafios interativos)\n Acesso a um grupo VIP de alunos e dicas direto dos nossos professores\n 💳 R$ 29,90 por mês ou R$ 149,00 no plano semestral (com mimo surpresa no envio! 🎁)\n\nPara conhecer é só acessar nosso link: [LINK SITE]"
+  utter_despedida:
+  - text: "Eu agradeço pela sua visita, miauzinho! 😸\n Fico por aqui, afinando meu miado e esperando você voltar quando quiser.\n Que sua semana seja cheia de harmonia, sorrisos e notas felizes! 🎼💛\n Até a próxima, com um miado carinhoso e um tchau de patinha! 👋🐾"
+  - text: "Miau… Parece que você foi embora antes de dar tchauzinho! 😸\n Se precisar de algo, estou sempre aqui, pronto para dar aquele miado de ajuda.\n Fica à vontade para voltar quando quiser! Que seu dia seja cheio de melodias felizes e muita inspiração! 🎼💛\n Até a próxima, com um miado de carinho e uma patinha acenando! 👋🐾"
+  utter_ask_modo_agendamento:
+  - text: "Certo! Você prefere que a aula seja [online](modo_agendamento:online) ou [presencial](modo_agendamento:presencial)?"
+  utter_ask_dados_pessoais:
+  - text: "Perfeito! Para agendar, preciso do seu nome completo, CPF, RG e data de nascimento (xx/xx/xxxx). Pode me passar, por favor?"
+  utter_ask_data_hora:
+  - text: "Miau! Dados recebidos! Agora, qual a melhor [data](date) e [horário](time) para você?"
+  utter_confirma_agendamento_final:
+  - text: "Miauravilha! Agendamento confirmado para {nome}!\nSua aula de {instrumentos} será {modo_agendamento} no dia {data_agendamento} às {hora_agendamento}.\nCPF: {cpf}, RG: {rg}, Nasc.: {data_nascimento}.\nAgora, vamos para o pagamento."
+  utter_pagamento:
+  - text: "Para finalizar, clique neste link e realize o pagamento: [LINK PAGAMENTO]"
+  utter_listagem_instrumentos:
+  - text: "Na Gato Harmonicos vendemos\nINSTRUMENTOS DE CORDA\nGuitarras, Violões, Contrabaixos, Ukuleles, Cavaquinhos, Violinos, Violas e Violoncelos\nINSTRUMENTOS DE SOPRO\nFlautas, Clarinetes, Saxofones, Trompetes, Trombones, Tubas e Gaitas de boca\nINSTRUMENTOS DE TECLAS\nTeclados, Sintetizadores, Pianos, Órgãos e Escaletas\nINSTRUMENTOS DE PERCUSSÃO\nBaterias, Pandeiros, Tamborins, Surdos, Timbas, Triângulos, Kalimbas e Boomwhackers\nPara adquirir é só entrar neste link e fazer sua compra\n[LINK SITE]"
+  utter_ask_modo_consultoria: # <--- NOME ALTERADO
+  - text: "Para a consultoria, você prefere que seja [online](modo_agendamento:online) ou [presencial](modo_agendamento:presencial)?"
+  utter_ask_rg:
+  - text: "Entendido. E qual o seu RG?"
+  utter_ask_cpf:
+  - text: "Ok. E o CPF?"
+  utter_ask_data_nascimento:
+  - text: "Certo. E a data de nascimento (xx/xx/xxxx)?"
+  utter_ask_nome:
+  - text: "Qual o seu nome completo?"
+  utter_default:
+  - text: "Miau... Desculpe, não entendi muito bem. Poderia repetir de outra forma?"
+  utter_inactivity_reminder: # <--- ADICIONE ESTA RESPOSTA
+  - text: "Miau! 😸 Parece que você deu uma sumidinha. Ainda precisa da minha ajuda felina por aqui? 🐾"
+
+actions:
+  - action_schedule_inactivity_reminder
+  - action_react_to_inactivity_reminder
+  - utter_saudacao
+  - utter_agendamento_aula
+  - utter_agendamento_consultoria
+  - utter_compra_instrumento
+  - utter_materiais
+  - utter_despedida
+  - utter_ask_modo_agendamento
+  - utter_ask_dados_pessoais
+  - utter_ask_data_hora
+  - utter_confirma_agendamento_final
+  - utter_pagamento
+  - utter_listagem_instrumentos
+  - utter_ask_instrumento_aula
+  - utter_ask_modo_consultoria # Use o nome que você decidiu
+  - utter_ask_rg
+  - utter_ask_cpf
+  - utter_ask_data_nascimento
+  - utter_ask_nome
+  - utter_default
+
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true

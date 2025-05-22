@@ -1,0 +1,422 @@
+version: "3.1"
+
+nlu:
+- lookup: dia_semana
+  examples: |
+    - segunda
+    - terça
+    - quarta
+    - quinta
+    - sexta
+    - sábado
+    - domingo
+    - segunda-feira
+    - terça-feira
+    - quarta-feira
+    - quinta-feira
+    - sexta-feira
+    - seg
+    - ter
+    - qua
+    - qui
+    - sex
+    - sab
+    - dom
+
+- lookup: periodo
+  examples: |
+    - manhã
+    - tarde
+    - noite
+    - de manhã
+    - pela manhã
+    - à tarde
+    - pela tarde
+    - à noite
+    - pela noite
+    - final da tarde
+    - comecinho da manhã
+
+- lookup: instrumentos
+  examples: |
+    - Guitarra
+    - Guitarras
+    - Violão
+    - Violões
+    - Baixo
+    - Contrabaixo
+    - Contrabaixos
+    - Ukulele
+    - Ukuleles
+    - Cavaquinho
+    - Cavaquinhos
+    - Violino
+    - Violinos
+    - Viola
+    - Violas
+    - Violoncelo
+    - Violoncelos
+    - Flauta
+    - Flautas
+    - Clarinete
+    - Clarinetes
+    - Saxofone
+    - Saxofones
+    - Trompete
+    - Trompetes
+    - Trombone
+    - Trombones
+    - Tuba
+    - Tubas
+    - Gaita de boca
+    - Gaitas de boca
+    - Teclado
+    - Teclados
+    - Sintetizador
+    - Sintetizadores
+    - Piano
+    - Pianos
+    - Órgão
+    - Órgãos
+    - Escaleta
+    - Escaletas
+    - Bateria
+    - Baterias
+    - Pandeiro
+    - Pandeiros
+    - Tamborim
+    - Tamborins
+    - Surdo
+    - Surdos
+    - Timba
+    - Timbas
+    - Triângulo
+    - Triângulos
+    - Bateria eletrônica
+    - Kalimba
+    - Kalimbas
+    - Boomwhacker
+    - Boomwhackers
+    - canto
+
+- lookup: forma_pagamento
+  examples: |
+    - cartão de crédito
+    - crédito
+    - cartão
+    - Pix
+    - pix
+    - boleto
+    - débito
+    - transferência bancária
+
+- regex: cpf_regex
+  examples: |
+    - \d{3}\.\d{3}\.\d{3}-\d{2}
+    - \d{11}
+
+- regex: rg_pattern_sp_regex
+  examples: |
+    - \d{2}\.\d{3}\.\d{3}-\d{1}
+    - \d{8}-\d{1}
+    - \d{9}
+
+- intent: saudacao
+  examples: |
+    - oi
+    - oie, tudo bem?
+    - Olá
+    - eae
+    - bom dia
+    - Boa tarde
+    - boa noite
+    - como vai?
+    - tudo bem?
+    - beleza
+    - suave?
+    - blz
+    - oiii
+    - Salve!
+    - Como estamos?
+    - Tudo em ordem?
+    - E aí, firmeza?
+    - Olá, bom dia!
+    - Boa tarde, como posso ajudar?
+    - Oi, tudo certo por aí?
+    - Ei!
+
+- intent: agendamento_aula
+  examples: |
+    - gostaria de agendar um aula
+    - agendar aula
+    - aulas
+    - Quero agendar aulas
+    - quero aulas
+    - quero me matricular em aulas
+    - queria ver uma aula
+    - Quero agendar aulas de [contrabaixo](instrumentos) [amanhã](date) de [tarde](periodo)
+    - Tem horário para aula de [violão](instrumentos)?
+    - Como faço para marcar uma aula experimental?
+    - Queria começar aulas de [canto](instrumentos)
+    - Agendar uma aula de [bateria](instrumentos) para [semana que vem](date)
+    - Gostaria de informações sobre aulas de [teclado](instrumentos)
+    - Ver disponibilidade para aulas de [guitarra](instrumentos) na [segunda](dia_semana) de [manhã](periodo)
+    - Marcar aula de [piano](instrumentos)
+    - Inscrição para aulas
+    - Quero aprender a tocar um [instrumento](instrumentos)
+    - quero aula de [baixo](instrumentos)
+
+- intent: agendamento_consultoria
+  examples: |
+    - gostaria de agendar uma consultoria
+    - agendar consultoria
+    - consultoria
+    - Quero agendar consultoria
+    - quero consultorias
+    - quero me matricular em consultoria
+    - Preciso de uma consultoria musical
+    - Como funciona a consultoria de vocês?
+    - Marcar um horário para consultoria de carreira musical
+    - Consultoria para bandas, vocês oferecem?
+    - Gostaria de uma sessão de consultoria sobre produção musical
+    - Agendar consultoria para a [segunda](dia_semana)
+    - Ver horários para consultoria [online](modo_agendamento:online)
+
+- intent: compra_instrumento
+  examples: |
+    - quero comprar
+    - Quero ver [instrumentos](instrumentos)
+    - vocês tem [instrumentos](instrumentos)?
+    - Quais [instrumentos](instrumentos) vocês tem?
+    - queria ver todos os [instrumentos](instrumentos)
+    - procuro um [violão](instrumentos) para iniciantes.
+    - Estou interessado em comprar uma [guitarra](instrumentos)
+    - Vocês vendem [teclados](instrumentos)?
+    - Qual o preço do [baixo](instrumentos) de 5 cordas?
+    - Tem [bateria eletrônica](instrumentos) à venda?
+    - Gostaria de adquirir um [cavaquinho](instrumentos)
+    - Onde vejo os [instrumentos](instrumentos) disponíveis para compra?
+    - Quero um [instrumento](instrumentos) bom e barato
+    - Busco um [saxofone](instrumentos) usado
+    - Têm [ukuleles](instrumentos)?
+    - Queria comprar um [violino](instrumentos)
+
+- intent: listagem_instrumentos
+  examples: |
+    - Pode listar os [instrumentos](instrumentos)
+    - quero
+    - sim
+    - por favor
+    - me informe todos
+    - me informe por favor
+    - Mostra a lista, por favor
+    - Quais são as opções?
+    - Sim, gostaria de ver
+    - Manda a lista completa
+    - Tenho interesse em ver
+    - Sim, pode mostrar
+    - Quero ver os [violões](instrumentos) disponíveis
+
+- intent: materiais
+  examples: |
+    - Materiais
+    - vocês tem materiais?
+    - Quero saber mais sobre os materiais didáticos.
+    - Vdd que vocês tem materiais didaticos?
+    - como acessar os materias
+    - quais materiais vocês teriam?
+    - Vocês fornecem apostilas?
+    - Tem algum material de apoio para as aulas?
+    - Onde encontro os materiais do curso?
+    - Gostaria de ver os métodos que vocês usam
+    - Os materiais estão inclusos?
+    - Como obtenho o material didático?
+    - Tem partituras ou tablaturas?
+    - Materiais para [guitarra](instrumentos)
+
+- intent: despedida
+  examples: |
+    - tchau!
+    - Até mais!
+    - valeu
+    - até logo
+    - falou
+    - obrigado pela ajuda
+    - Valeu mesmo, até a proxima
+    - Muito obrigada por tirar minhas dúvidas!
+    - Agradeço, vou olhar com calma e depois volto
+    - Vou pensar nas ulas e depois volto!
+    - Vou ver os conteúdos e já volto com mais dúvidas, haha!
+    - Já consegui me descidir, obrigada
+    - Vou decidir com calma e te dou um retorno, ok?
+    - Agendo depois.
+    - xau
+    - obg
+    - Vlw.
+    - Pode pá
+    - Grato
+    - Gratidão
+    - Entendi, obrigada pelas informações!!
+    - Aí achei melhor não vou querer mais, obrigada.
+    - obrigada! Falo com vocês mais tarde
+    - obrigada. Retorno depois
+    - Adorei a conversa, até logo miaumiau❤
+    - Por enquanto é só, volto depois. Valeu
+    - Certo, muito obrigada. Falo com você depois.
+    - Tudo bem, agradeço! Volto em outro momento.
+    - Muito obrigado tchau bjs 😘
+    - Fechou, depois eu apareço de novo.
+    - Grata, tchauzinho!!
+    - Abração, até!
+    - Fui!
+    - Tenha um bom dia/tarde/noite!
+    - Agradecido(a)!
+    - Nos falamos em breve.
+    - Tudo esclarecido, muito obrigado(a).
+    - Por agora é isso, valeu!
+
+- intent: agendamento_modo
+  examples: |
+    - [presencial](modo_agendamento)
+    - quero [presencial](modo_agendamento)
+    - [presencial](modo_agendamento) por favor
+    - quero aula [presencial](modo_agendamento), por favor
+    - prefiro ir até vocês
+    - na escola mesmo
+    - gostaria de fazer aulas aí no local
+    - tem como ser [presencialmente](modo_agendamento:presencial)?
+    - modalidade [presencial](modo_agendamento)
+    - quero ir na unidade
+    - [online](modo_agendamento)
+    - quero [online](modo_agendamento)
+    - [online](modo_agendamento) por favor
+    - quero aula [online](modo_agendamento), por favor
+    - quero fazer de casa
+    - aula a distancia
+    - [remoto](modo_agendamento:online)
+    - pode ser por videochamada?
+    - aula [virtual](modo_agendamento:online)
+    - prefiro [online](modo_agendamento)
+    - tem opção de aula EAD?
+    - assistir de casa
+
+- intent: agendamento_hora
+  examples: |
+    - A [tarde](periodo)
+    - quero de [noite](periodo)
+    - pode ser de [manha](periodo) às [8h](time).
+    - [21h](time)
+    - Pode ser as [16 horas](time).
+    - [9:30](time) da [manhã](periodo)
+    - [14:00](time)
+    - [sete da noite](time)
+    - por volta das [10h](time)
+    - no final da [tarde](periodo), tipo [17:30](time)
+    - às [dezoito](time)
+    - [19 horas](time)
+    - Que tal às [10:00](time)?
+    - Pode ser às [11h30](time)?
+    - Às [15h](time) seria bom
+    - Que horas tem disponível de [manhã](periodo)?
+    - Qual o primeiro horário da [tarde](periodo)?
+    - [17/02](date)
+    - [25/06/2025](date)
+    - [segunda](dia_semana) às [16h](time)
+    - [19/05](date) às [12:20](time)
+    - [12:09](time) dia [15/09](date)
+    - [19h](time) da [18/06](date)
+    - Quero no dia [18/06](date) às [19h](time).
+    - Pode ser [18/06](date) no horário das [19h](time)?
+    - No dia [18 de junho](date) às [sete da noite](time).
+    - [18 de junho](date) [às 19 horas](time).
+    - Agendar para [amanhã](date) [às 15h](time).
+    - Queria [depois de amanhã](date) de [manhã](periodo).
+    - [Na terça-feira](dia_semana) [às 10h](time)
+    - Horário: [9:00](time) no dia [21/07](date).
+    - Dia [01/08/2025](date), horário: [11:00](time).
+    - Queria para [quinta](dia_semana) [à tarde](periodo).
+    - Agendar para [sexta](dia_semana), [no final da tarde](periodo).
+    - Que horas tem disponível para [hoje](date)?
+    - [Hoje](date) [às 20h](time).
+    - Pode ser [na próxima segunda](dia_semana) [às 14h](time)?
+    - Queria para [semana que vem](date) [na quarta](dia_semana) [de noite](periodo).
+
+- intent: pagamento
+  examples: |
+    - Quero pagar com [cartão de crédito](forma_pagamento).
+    - Vou pagar no [crédito](forma_pagamento).
+    - Gostaria de pagar com [cartão](forma_pagamento).
+    - Quero pagar com [Pix](forma_pagamento).
+    - [Pix](forma_pagamento)
+    - [Cartão](forma_pagamento)
+    - [crédito](forma_pagamento)
+    - [cartão de crédito](forma_pagamento)
+    - o pagamento será por [Pix](forma_pagamento)
+    - [boleto](forma_pagamento)
+    - Vou pagar no [boleto](forma_pagamento)
+    - o pagamento será via [boleto](forma_pagamento).
+    - vou querer pagar no [pix](forma_pagamento)
+    - Como faço o pagamento?
+    - Quais são as [formas de pagamento](forma_pagamento)?
+    - Aceita [pix](forma_pagamento)?
+    - Posso pagar com [débito](forma_pagamento)?
+    - Parcelam no [cartão](forma_pagamento)?
+    - Tem como gerar um [boleto](forma_pagamento)?
+    - Aceitam [transferência bancária](forma_pagamento)?
+    - Quais bandeiras de [cartão](forma_pagamento) são aceitas?
+    - Como funciona o pagamento mensal?
+    - Quero acertar o valor.
+
+- intent: fornecer_dados_pessoais
+  examples: |
+    - Meu CPF é [123.456.789-00](cpf).
+    - O RG é [11.222.333-4](rg).
+    - Minha data de nascimento é [25/10/1990](date).
+    - Meu nome completo é [Maria Silva Santos](nome).
+    - [João Pereira Costa](nome), RG: [98.765.432-1](rg), CPF: [00011122233](cpf).
+    - Nasci em [05 de Maio de 1985](date).
+    - Meu cpf é [444.555.666-77](cpf).
+    - RG: [55.666.777-8](rg).
+    - Nome: [pedro henrique almeida](nome).
+    - Data de nascimento: [10/12/2000](date).
+    - meu nome é [Ana Carolina Lima](nome).
+    - o meu cpf é [111.222.333-44](cpf)
+    - nasci dia [15 de março de 1992](date)
+    - cpf: [555.666.777-88](cpf), rg: [33.444.555-6](rg)
+    - Minha data é [dia 5 do 7 de 99](date).
+    - Meu nome é [Jeon Jungkook](nome) e nasci em [01/09/1997](date).
+    - Nome: [Jeon Jungkook](nome). RG: [12.345.678-9](rg).
+    - [Jeon Jungkook](nome), [01/09/1997](date)
+    - Meu nome é [Jeon Jungkook](nome).
+    - O nome para cadastro é [Takeshi Tanaka](nome).
+    - O nome completo é [Wei Zhang](nome), e o CPF é [999.888.777-66](cpf).
+    - Meu nome é [Raj Patel](nome). Minha data de nascimento é [15/08/1947](date).
+    - [Muhammad Ali Khan](nome). RG: [12.345.678-0](rg), CPF [010.202.303-40](cpf).
+    - Por favor, use o nome [Tran Van Hung](nome).
+    - Meu nome é [Jean-Pierre Dubois](nome).
+    - O nome é [Heinrich Müller](nome) e a data de nascimento é [22/04/1920](date).
+    - [Alessandro Rossi](nome), CPF [777.666.555-44](cpf).
+    - Nome: [Miguel Sánchez](nome). Data de nascimento: [23/04/1616](date).
+    - Meu nome é [Elena Smirnova](nome).
+    - O nome completo é [Elizabeth Jones](nome) e o RG é [98.765.432-1](rg).
+    - [Anna Nowak](nome). Nasci em [10 de janeiro de 1980](date).
+    - Nome para registro: [Kwame Nkrumah](nome).
+    - Meu nome é [Chinua Achebe](nome), CPF: [333.222.111-00](cpf).
+    - [Nelson Mandela](nome). Data de nascimento em [18/07/1918](date).
+    - Chamo-me [Fatima Zahra](nome).
+    - O nome é [Wangari Maathai](nome), RG [45.678.901-2](rg).
+    - Meu nome é [Chimamanda Adichie](nome). CPF [121.313.414-51](cpf), Data de nascimento [15/09/1977](date).
+    - O nome completo é [Sofie Nielsen](nome).
+    - Meu nome é [Carlos Garcia](nome).
+    - [Ana Paula Oliveira](nome), data de nascimento [08/03/1995](date).
+    - CPF: [222.333.444-55](cpf). Nome: [José Rodríguez](nome).
+    - RG: [66.777.888-9](rg). Meu nome é [Jessica Williams](nome).
+    - Nome [Lucas Souza](nome). Nasci em [01/01/2000](date).
+    - Meus dados são: nome [Jeon Jungkook](nome), CPF [123.456.789-00](cpf), data de nascimento [01/09/1997](date).
+    - O RG é [98.765.432-1](rg), o nome é [Wei Zhang](nome).
+    - Data de nascimento [25/10/1990](date), nome [Maria Silva Santos](nome), CPF [444.555.666-77](cpf).
+    - O nome para o cadastro é [Nelson Mandela](nome).
+    - CPF [000.111.222-33](cpf). Nome [João Pereira Costa](nome). RG [11.222.333-4](rg).
+    - Nasci no dia [18/07/1918](date), meu nome é [Nelson Mandela](nome).
+    - meu nome é [Tais Umbelina](nome), meu cpf é [972.574.090-48](cpf), meu rg é [39.279.792-6](rg) e nasci em [15/09/2023](date)
+    - [Carlos Garcia](nome), nasci em [01/01/2000](date), documentos: [333.444.555-66](cpf) e [44.555.666-7](rg)
