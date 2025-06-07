@@ -19,11 +19,11 @@ entities:
   - periodo
   - dia_semana
   - forma_pagamento
-  - cpf  # Usará RegexEntityExtractor
-  - rg   # Usará RegexEntityExtractor
-  - nome # Usará DIETClassifier
-  - date # Usará Duckling
-  - time # Usará Duckling
+  - cpf
+  - rg
+  - nome
+  - date
+  - time
   - modo_agendamento
 
 slots:
@@ -58,11 +58,11 @@ slots:
       - type: from_entity
         entity: rg
   data_nascimento:
-    type: text # Duckling extrai como 'time', mas guardamos como texto para evitar confusão com 'date' do agendamento
+    type: text
     influence_conversation: true
     mappings:
       - type: from_entity
-        entity: date # Assumindo que Duckling pegará isso como 'date'
+        entity: date
   data_agendamento:
     type: text
     influence_conversation: true
@@ -110,7 +110,7 @@ responses:
   - text: "Para finalizar, clique neste link e realize o pagamento: [LINK PAGAMENTO]"
   utter_listagem_instrumentos:
   - text: "Na Gato Harmonicos vendemos\nINSTRUMENTOS DE CORDA\nGuitarras, Violões, Contrabaixos, Ukuleles, Cavaquinhos, Violinos, Violas e Violoncelos\nINSTRUMENTOS DE SOPRO\nFlautas, Clarinetes, Saxofones, Trompetes, Trombones, Tubas e Gaitas de boca\nINSTRUMENTOS DE TECLAS\nTeclados, Sintetizadores, Pianos, Órgãos e Escaletas\nINSTRUMENTOS DE PERCUSSÃO\nBaterias, Pandeiros, Tamborins, Surdos, Timbas, Triângulos, Kalimbas e Boomwhackers\nPara adquirir é só entrar neste link e fazer sua compra\n[LINK SITE]"
-  utter_ask_modo_consultoria: # <--- NOME ALTERADO
+  utter_ask_modo_consultoria:
   - text: "Para a consultoria, você prefere que seja [online](modo_agendamento:online) ou [presencial](modo_agendamento:presencial)?"
   utter_ask_rg:
   - text: "Entendido. E qual o seu RG?"
@@ -122,7 +122,7 @@ responses:
   - text: "Qual o seu nome completo?"
   utter_default:
   - text: "Miau... Desculpe, não entendi muito bem. Poderia repetir de outra forma?"
-  utter_inactivity_reminder: # <--- ADICIONE ESTA RESPOSTA
+  utter_inactivity_reminder:
   - text: "Miau! 😸 Parece que você deu uma sumidinha. Ainda precisa da minha ajuda felina por aqui? 🐾"
 
 actions:
@@ -141,7 +141,7 @@ actions:
   - utter_pagamento
   - utter_listagem_instrumentos
   - utter_ask_instrumento_aula
-  - utter_ask_modo_consultoria # Use o nome que você decidiu
+  - utter_ask_modo_consultoria
   - utter_ask_rg
   - utter_ask_cpf
   - utter_ask_data_nascimento
