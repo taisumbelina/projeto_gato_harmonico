@@ -20,22 +20,18 @@ pipeline:
     epochs: 100
     constrain_similarities: true
   - name: FallbackClassifier
-    threshold: 0.4 # Aumentei um pouco para ser menos propenso a fallback
+    threshold: 0.4
     ambiguity_threshold: 0.1
-  # Adicione o RegexEntityExtractor APÓS os featurizers e ANTES do DIET se quiser
-  # que ele ajude na extração, ou após se quiser que ele atue de forma independente.
-  # Aqui, coloco antes para que o DIET possa se beneficiar.
   - name: RegexEntityExtractor
     use_lookup_tables: true
     use_regexes: true
     case_sensitive: False
-  # Duckling DEVE estar rodando no endereço especificado.
   - name: DucklingEntityExtractor
     url: "http://localhost:8000"
     dimensions:
       - date
       - time
-      - number # Adicione outras dimensões se precisar
+      - number
     locale: "pt_BR"
     timezone: "America/Sao_Paulo"
 
